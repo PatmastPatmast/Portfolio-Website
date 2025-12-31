@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 :root{
     --ff-primary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     --ff-secondary: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -25,7 +24,6 @@
     0.125em 0.125em 0.25em rgba(0,0,0,.15);
 }
 
-
 @media (min-width: 800px) {
     :root {
         --fs-hl: 4.5rem;
@@ -34,8 +32,6 @@
         --fs-body: 1.125rem;
     }
 }
-
-
 
 /* General styles */
 
@@ -77,13 +73,12 @@ h3 {
     margin: 0;
 }
 
-h1 { font-size: var(--fs-hl)}
-h2 { font-size: var(--fs-h2)}
-h3 { font-size: var(--fs-h3)}
-
+h1 { font-size: var(--fs-hl) }
+h2 { font-size: var(--fs-h2) }
+h3 { font-size: var(--fs-h3) }
 
 .section__title{
- margin-bottom: .25em;
+    margin-bottom: .25em;
 }
 
 .section__title--intro{
@@ -94,7 +89,7 @@ h3 { font-size: var(--fs-h3)}
     display: block;
 }
 
-/*buttons */
+/* Buttons */
 
 .btn{
     display: inline-block;
@@ -129,15 +124,15 @@ h3 { font-size: var(--fs-h3)}
 
 .section__subtitle--work{
     color: var(--clr-accent);
-    font-weight: var(--fw-bold); /* FIX: previously used a color variable */
+    font-weight: var(--fw-bold);
     text-align: center;
 }
 
-/* header */
+/* Header */
 
 header{
     display: flex;
-    justify-content: space-between; /* FIX: justify-items doesn't work on flex */
+    justify-content: space-between;
     padding: 1em;
 }
 
@@ -235,8 +230,8 @@ header{
     right: 0;
 }
 
-.hamburger::before { top: 6px;}
-.hamburger::after{bottom: 6px;}
+.hamburger::before { top: 6px; }
+.hamburger::after { bottom: 6px; }
 
 /* Intro section */
 
@@ -282,7 +277,7 @@ header{
     }
 }
 
-/* my-services section*/
+/* My services section */
 
 .my-services{
     background-color: var(--clr-accent);
@@ -329,13 +324,15 @@ header{
     }
 }
 
+/* About */
+
 .about-me {
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .about-me__img{
-    box-shadow: var(--bs)
+    box-shadow: var(--bs);
 }
 
 @media (min-width: 600px) {
@@ -370,6 +367,8 @@ header{
     }
 }
 
+/* My work */
+
 .my-work {
     background-color: var(--clr-dark);
     color: var(--clr-light);
@@ -396,7 +395,7 @@ header{
     transform: scale(1.03);
 }
 
-/* footer */
+/* Footer */
 
 .footer {
     background: #111;
@@ -417,7 +416,7 @@ header{
 
 .footer-link:hover,
 .social-list__link:hover {
-    opacity: .7
+    opacity: .7;
 }
 
 .footer__link:hover{
@@ -460,13 +459,21 @@ header{
     color: var(--clr-dark);
 }
 
+/* ✅ FIX: align title + subtitle + list to same centered column */
+.writing .section__title,
+.writing .section__subtitle {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
 .writing__list {
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 800px;            
+    margin: 2em auto 0;          
 }
 
 .writing__item {
-    max-width: 800px;
     margin: 0 auto;
     padding: 1.25em 1.5em;
     border-left: 4px solid var(--clr-accent);
@@ -537,13 +544,13 @@ header{
    ===================== */
 
 .essay--thesis .essay__title {
-    font-size: 2.25rem;
-    line-height: 1.2;
+    font-size: 2.1rem;
+    line-height: 1.15;
     margin-bottom: 0.6em;
 }
 
 @media (min-width: 800px) {
     .essay--thesis .essay__title {
-        font-size: 3rem;
+        font-size: 2.75rem;
     }
 }

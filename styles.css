@@ -21,7 +21,7 @@
     --fs-body: 1rem;
 
     --bs: 0.25em 0.25em 0.75em rgba(0,0,0,0.25),
-    0.125em 0.125em 0.25em rgba(0,0,0,.15);
+          0.125em 0.125em 0.25em rgba(0,0,0,.15);
 }
 
 @media (min-width: 800px) {
@@ -375,20 +375,37 @@ header{
     text-align: center;
 }
 
+/* ✅ Portfolio grid (1 column mobile, 2 columns desktop) */
 .portfolio{
     max-width: 1000px;
-    display: inline-block;
-    justify-content: center;
+    margin: 2em auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25em;
+    padding: 0 1em;
+}
+
+@media (min-width: 700px) {
+    .portfolio{
+        grid-template-columns: 1fr 1fr;
+        gap: 1.75em;
+        padding: 0 2em;
+    }
 }
 
 .portfolio__item{
+    display: block;
     overflow: hidden;
+    border-radius: 8px;
 }
 
 .portfolio__img{
+    width: 100%;
+    height: auto;
+    display: block;
     transition:
-    transform 750ms cubic-bezier(.5,0,.5,1),
-    opacity 250ms linear;
+        transform 750ms cubic-bezier(.5,0,.5,1),
+        opacity 250ms linear;
 }
 
 .portfolio__img:hover{
@@ -459,7 +476,7 @@ header{
     color: var(--clr-dark);
 }
 
-/* ✅ FIX: align title + subtitle + list to same centered column */
+/* ✅ keep writing aligned in a nice readable column */
 .writing .section__title,
 .writing .section__subtitle {
     max-width: 800px;
@@ -469,8 +486,8 @@ header{
 }
 
 .writing__list {
-    max-width: 800px;            
-    margin: 2em auto 0;          
+    max-width: 800px;
+    margin: 2em auto 0;
 }
 
 .writing__item {

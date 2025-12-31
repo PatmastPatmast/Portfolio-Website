@@ -503,4 +503,86 @@ header{
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+
 }
+/* =====================
+   Writing section
+   ===================== */
+
+.writing {
+    background: var(--clr-light);
+    color: var(--clr-dark);
+}
+
+.writing__list {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.writing__item {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.25em 1.5em;
+    border-left: 4px solid var(--clr-accent);
+}
+
+.writing__title {
+    margin-bottom: .25em;
+}
+
+.writing__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.writing__title a:hover {
+    color: var(--clr-accent);
+}
+
+.writing__meta {
+    margin: 0 0 .75em;
+    opacity: .75;
+    font-family: var(--ff-secondary);
+}
+
+.writing__excerpt {
+    margin: 0 0 1em;
+}
+
+.writing__readmore {
+    display: inline-block;
+    padding: .5em 1.25em;
+    background: var(--clr-accent);
+    color: var(--clr-dark);
+    text-decoration: none;
+    cursor: pointer;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: var(--fw-bold);
+    transition: transform 200ms ease-in-out;
+}
+
+.writing__readmore:hover {
+    transform: scale(1.05);
+}
+
+/* =====================
+   Essay page
+   ===================== */
+
+.essay {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4em 2em;
+}
+
+.essay__article {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.essay__content p {
+    line-height: 1.8;
+}
+

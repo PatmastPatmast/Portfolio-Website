@@ -6,8 +6,8 @@
 
 
 :root{
-    --ff-primary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;
-    --ff-secondary: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;; 
+    --ff-primary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --ff-secondary: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
     --fw-reg: 300;
     --fw-bold: 900;
@@ -32,9 +32,7 @@
         --fs-h2: 3.75rem;
         --fs-h3: 1.5rem;
         --fs-body: 1.125rem;
-
     }
-
 }
 
 
@@ -55,15 +53,12 @@ body {
 }
 
 section{
-
     padding: 5em 2em;
 }
 
 img{
-
     display: block;
     max-width: 100%;
-
 }
 
 strong {font-weight: var(--fw-bold)}
@@ -89,26 +84,19 @@ h3 { font-size: var(--fs-h3)}
 
 .section__title{
  margin-bottom: .25em;
-
 }
 
 .section__title--intro{
-
     font-weight: var(--fw-reg);
-
 }
 
-
 .section__title--intro strong{
-
     display: block;
-
 }
 
 /*buttons */
 
 .btn{
-
     display: inline-block;
     padding: .5em 1.5em;
     background: var(--clr-accent);
@@ -120,7 +108,6 @@ h3 { font-size: var(--fs-h3)}
     letter-spacing: 2px;
     font-weight: var(--fw-bold);
     transition: transform 200ms ease-in-out;
-
 }
 
 .btn:hover {
@@ -129,8 +116,7 @@ h3 { font-size: var(--fs-h3)}
 
 .section__subtitle{
     margin: 0;
-    font-size: var(--fs-h3); 
-
+    font-size: var(--fs-h3);
 }
 
 .section__subtitle--intro,
@@ -139,12 +125,11 @@ h3 { font-size: var(--fs-h3)}
     padding: .25em 1em;
     font-family: var(--ff-secondary);
     margin-bottom: 1em;
-
 }
 
 .section__subtitle--work{
     color: var(--clr-accent);
-    font-weight: var(--clr-light);
+    font-weight: var(--fw-bold); /* FIX: previously used a color variable */
     text-align: center;
 }
 
@@ -152,7 +137,7 @@ h3 { font-size: var(--fs-h3)}
 
 header{
     display: flex;
-    justify-items: space-between;
+    justify-content: space-between; /* FIX: justify-items doesn't work on flex */
     padding: 1em;
 }
 
@@ -172,7 +157,6 @@ header{
 
     transform: translateX(100%);
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
-
 }
 
 .nav__list{
@@ -214,7 +198,6 @@ header{
 
 .nav-open .navToggle{
     position: fixed;
-
 }
 
 .nav-open .hamburger {
@@ -230,23 +213,18 @@ header{
 }
 
 .hamburger{
-    
     display: block;
     position: relative;
-    
-
 }
 
 .hamburger,
 .hamburger::before,
 .hamburger::after {
-
     background: var(--clr-accent);
     width: 2em;
     height: 3px;
     border-radius: 1em;
     transition: transform 250ms ease-in-out;
-
 }
 
 .hamburger::before,
@@ -255,8 +233,6 @@ header{
     position: absolute;
     left: 0;
     right: 0;
-
-    
 }
 
 .hamburger::before { top: 6px;}
@@ -264,21 +240,17 @@ header{
 
 /* Intro section */
 
-
 .intro {
-
     position: relative;
 }
 
 .intro__img {
     box-shadow: var(--bs);
-
 }
 
 .section__subtitle--intro{
     display: inline-block;
 }
-
 
 @media (min-width: 600px) {
     .intro {
@@ -286,44 +258,37 @@ header{
         width: min-content;
         margin: 0 auto;
         grid-column-gap: 1em;
-        grid-template-areas: 
+        grid-template-areas:
             "img title"
             "img subtitle";
-            grid-template-columns: min-content max-content;
+        grid-template-columns: min-content max-content;
     }
 
-        .intro__img{
-            grid-area: img;
-            min-width: 250px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .section__subtitle--intro{
-
-            align-self: start;
-            grid-column: -1/ 1;
-            grid-row: 2;
-            text-align: right;
-            position: relative;
-            left: -1.5em;
-            width: calc(100% + 1.5em);
-
-        }
-
+    .intro__img{
+        grid-area: img;
+        min-width: 250px;
+        position: relative;
+        z-index: 2;
     }
 
+    .section__subtitle--intro{
+        align-self: start;
+        grid-column: -1/ 1;
+        grid-row: 2;
+        text-align: right;
+        position: relative;
+        left: -1.5em;
+        width: calc(100% + 1.5em);
+    }
+}
 
 /* my-services section*/
 
 .my-services{
-
     background-color: var(--clr-accent);
     color: var(--clr-light);
     background-image: url(./MyServices.jpg);
-    
     background-size: cover;
-    color: var(--clr-light);
     text-align: center;
 }
 
@@ -340,12 +305,10 @@ header{
     margin: 0.5em auto 1em;
     background: var(--clr-light);
     opacity: 0.25;
-
 }
 
 .services {
     margin-bottom: 4em;
-    
 }
 
 .service {
@@ -354,25 +317,21 @@ header{
 }
 
 @media (min-width: 800px) {
-
     .services {
         display: flex;
         max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
-
     }
 
     .service + .service {
         margin-left: 2em;
     }
-
 }
-.about-me {
 
+.about-me {
     max-width: 1000px;
     margin: 0 auto;
-
 }
 
 .about-me__img{
@@ -380,20 +339,20 @@ header{
 }
 
 @media (min-width: 600px) {
-
     .about-me{
         display: grid;
         grid-template-columns: 1fr 200px;
-        grid-template-areas: 
+        grid-template-areas:
             "title img"
             "subtitle img"
             "text img";
-            grid-column-gap: 2em;
+        grid-column-gap: 2em;
     }
+
     .section__title--about{
         grid-area: title;
     }
-    
+
     .section__subtitle--about{
         grid-column: 1/ -1;
         grid-row: 2;
@@ -409,11 +368,9 @@ header{
         position: relative;
         z-index: 2;
     }
-
 }
 
 .my-work {
-    
     background-color: var(--clr-dark);
     color: var(--clr-light);
     text-align: center;
@@ -423,48 +380,39 @@ header{
     max-width: 1000px;
     display: inline-block;
     justify-content: center;
-    
 }
 
 .portfolio__item{
-   
     overflow: hidden;
 }
 
 .portfolio__img{
-    transition: 
+    transition:
     transform 750ms cubic-bezier(.5,0,.5,1),
     opacity 250ms linear;
 }
 
-.portfolio__img:hover
-{
+.portfolio__img:hover{
     transform: scale(1.03);
-    
-    
 }
 
 /* footer */
 
 .footer {
-
     background: #111;
     color: var(--clr-accent);
     text-align: center;
     padding: 2.5em 0;
     font-size: var(--fs-h3);
-
 }
 
-.footer a { 
+.footer a {
     color: inherit;
     text-decoration: none;
 }
 
 .footer-link {
-    
     font-weight: var(--fw-bold);
-
 }
 
 .footer-link:hover,
@@ -474,7 +422,6 @@ header{
 
 .footer__link:hover{
     text-decoration: underline;
-
 }
 
 .social-list{
@@ -493,7 +440,6 @@ header{
 /* Individual portfolio items styles */
 
 .portfolio-item-individual {
-
     padding: 0 2em 2em;
     max-width: 1200px;
     margin: 0 auto;
@@ -503,8 +449,8 @@ header{
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-
 }
+
 /* =====================
    Writing section
    ===================== */
@@ -584,4 +530,20 @@ header{
 
 .essay__content p {
     line-height: 1.8;
+}
+
+/* =====================
+   Thesis overrides (smaller title)
+   ===================== */
+
+.essay--thesis .essay__title {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin-bottom: 0.6em;
+}
+
+@media (min-width: 800px) {
+    .essay--thesis .essay__title {
+        font-size: 3rem;
+    }
 }

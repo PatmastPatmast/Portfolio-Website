@@ -620,20 +620,17 @@ header{
 }
 
 .lightbox__btn:hover {
-    transform: scale(1.03);
     background: rgba(255,255,255,0.2);
 }
 
 .lightbox__btn--prev {
     left: 24px;
     top: 50%;
-    transform: translateY(-50%);
 }
 
 .lightbox__btn--next {
     right: 24px;
     top: 50%;
-    transform: translateY(-50%);
 }
 
 .lightbox__btn--close {
@@ -642,6 +639,7 @@ header{
     font-size: 2.2rem;
     line-height: 1;
 }
+
 
 
 

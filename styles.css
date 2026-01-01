@@ -298,18 +298,29 @@ header{
     padding: 1.25rem 2rem;
 }
 
+.site-nav__list li {
+    text-align: center;
+}
+
 .site-nav a {
     text-decoration: none;
     color: var(--clr-dark);
     font-weight: var(--fw-bold);
     letter-spacing: 0.08em;
     font-size: 0.75rem;
+
+    /* ✅ multi-line links centered per item */
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
 }
 
 .site-nav a:hover {
     color: var(--clr-accent);
 }
-
 
 
 
@@ -678,6 +689,7 @@ header{
     font-size: 2.2rem;
     line-height: 1;
 }
+
 
 
 

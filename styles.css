@@ -277,6 +277,43 @@ header{
     }
 }
 
+/* =====================
+   Minimal Top Navigation
+   ===================== */
+
+.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--clr-light);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.site-nav__list {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    list-style: none;
+    margin: 0;
+    padding: 1.25rem 2rem;
+}
+
+.site-nav a {
+    text-decoration: none;
+    color: var(--clr-dark);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+}
+
+.site-nav a:hover {
+    color: var(--clr-accent);
+}
+
+
+
+
+
 /* My services section */
 
 .my-services{

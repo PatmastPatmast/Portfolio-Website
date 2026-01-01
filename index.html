@@ -6,23 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Hlubek Portfolio</title>
 
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-<nav class="top-nav">
-    <ul class="top-nav__list">
+<!-- ✅ Top Navigation (matches .site-nav CSS) -->
+<nav class="site-nav">
+    <ul class="site-nav__list">
         <li><a href="#about">About Me</a></li>
         <li><a href="#writing">Writings</a></li>
         <li><a href="#work">My Work</a></li>
         <li><a href="#contact">Contact Me</a></li>
     </ul>
 </nav>
-
-
 
 <!-- Introduction -->
 <section class="intro" id="home">
@@ -136,9 +135,6 @@
     </p>
 
     <div class="portfolio">
-        
-        <!-- Lightbox images -->
-        
         <a href="#" class="portfolio__item">
             <img src="Fist-Hunter.png" alt="" class="portfolio__img js-lightbox">
         </a>
@@ -181,6 +177,9 @@
     </div>
 </section>
 
+<!-- ✅ Contact anchor so nav "Contact Me" works -->
+<section id="contact" style="padding: 0;"></section>
+
 <!-- Footer -->
 <footer class="footer">
     <a href="mailto:PatrickHlubek@proton.me" class="footer-link">
@@ -189,18 +188,19 @@
 
     <ul class="social-list">
         <li class="social-list__item">
-            <a class="social-list__link" href="https://www.instagram.com/patmast/">
+            <a class="social-list__link" href="https://www.instagram.com/patmast/" target="_blank" rel="noopener">
                 <i class="fa-brands fa-instagram"></i>
             </a>
         </li>
         <li class="social-list__item">
-            <a class="social-list__link" href="https://www.artstation.com/patmast">
+            <a class="social-list__link" href="https://www.artstation.com/patmast" target="_blank" rel="noopener">
                 <i class="fa-brands fa-artstation"></i>
             </a>
         </li>
         <li class="social-list__item">
             <a class="social-list__link"
-               href="https://www.linkedin.com/in/patrick-hlubek-010282272/">
+               href="https://www.linkedin.com/in/patrick-hlubek-010282272/"
+               target="_blank" rel="noopener">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
         </li>
@@ -211,5 +211,3 @@
 
 </body>
 </html>
-
-

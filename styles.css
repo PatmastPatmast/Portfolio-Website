@@ -620,7 +620,7 @@ header{
 }
 
 .lightbox__btn:hover {
-    transform: scale(1.06);
+    transform: scale(1.03);
     background: rgba(255,255,255,0.2);
 }
 
@@ -642,5 +642,6 @@ header{
     font-size: 2.2rem;
     line-height: 1;
 }
+
 
 

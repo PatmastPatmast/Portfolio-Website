@@ -572,36 +572,7 @@ header{
     }
 }
 /* =====================
-   Lightbox (fullscreen image)
-   ===================== */
-
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 200ms ease;
-}
-
-.lightbox.is-open {
-    opacity: 1;
-    pointer-events: all;
-}
-
-.lightbox img {
-    max-width: 92vw;
-    max-height: 92vh;
-    height: auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,.6);
-    cursor: zoom-out;
-}
-/* =====================
-   Lightbox
+   Lightbox (Fullscreen)
    ===================== */
 
 .lightbox {
@@ -613,13 +584,24 @@ header{
     justify-content: center;
     z-index: 9999;
     padding: 2rem;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+}
+
+.lightbox.is-open {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .lightbox__img {
     max-width: min(1100px, 92vw);
     max-height: 88vh;
+    height: auto;
     box-shadow: 0 20px 60px rgba(0,0,0,0.45);
     border-radius: 10px;
+    cursor: zoom-out;
 }
 
 .lightbox__btn {
@@ -660,3 +642,5 @@ header{
     font-size: 2.2rem;
     line-height: 1;
 }
+
+

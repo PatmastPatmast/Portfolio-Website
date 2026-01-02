@@ -351,6 +351,7 @@
       openLightbox(index);
     });
   });
+})();
 
 // =====================
 // My Work – Selected / PATMAST switch
@@ -393,5 +394,6 @@
     b.addEventListener('click', () => setPanel(b.dataset.target))
   );
 })();
+
 
 

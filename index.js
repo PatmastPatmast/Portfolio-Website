@@ -351,4 +351,47 @@
       openLightbox(index);
     });
   });
+
+// =====================
+// My Work – Selected / PATMAST switch
+// =====================
+(() => {
+  const btns = Array.from(
+    document.querySelectorAll('.work-switch__btn[data-target]')
+  );
+  const panels = Array.from(
+    document.querySelectorAll('.work-panel[data-panel]')
+  );
+
+  if (btns.length === 0 || panels.length === 0) return;
+
+  function setPanel(key) {
+    btns.forEach(b => {
+      const active = b.dataset.target === key;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    panels.forEach(p => {
+      p.classList.toggle('is-active', p.dataset.panel === key);
+    });
+
+    try {
+      localStorage.setItem('workTab', key);
+    } catch {}
+  }
+
+  // Init
+  let saved = null;
+  try {
+    saved = localStorage.getItem('workTab');
+  } catch {}
+
+  setPanel(saved || 'selected');
+
+  btns.forEach(b =>
+    b.addEventListener('click', () => setPanel(b.dataset.target))
+  );
 })();
+
+

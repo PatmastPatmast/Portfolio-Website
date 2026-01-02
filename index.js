@@ -1,5 +1,5 @@
 // =====================
-// Lightbox (Fullscreen Images + Arrows + Touch Swipe + Animations)
+// Lightbox (Fullscreen Images + Arrows + Pointer Swipe + Animations)
 // Thumbnail grid -> Full image via <a href="FULL.webp">
 // =====================
 
@@ -13,17 +13,6 @@ if (lightboxImgs.length > 0) {
   let lightboxEl = null;
   let prevBodyOverflow = '';
 
-  // ---- Touch swipe state ----
-  let startX = 0;
-  let startY = 0;
-  let deltaX = 0;
-  let deltaY = 0;
-  let isSwiping = false;
-
-  const SWIPE_MIN_X = 50;        // min horizontal distance to count as swipe
-  const SWIPE_MAX_Y = 60;        // if vertical movement too large, ignore
-  const SWIPE_LOCK_RATIO = 1.2;  // horizontal must be clearly stronger than vertical
-
   function getLightboxImgEl() {
     return document.querySelector('.lightbox__img');
   }
@@ -32,12 +21,10 @@ if (lightboxImgs.length > 0) {
   function animateOpen(imgEl) {
     if (!imgEl) return;
 
-    // Start state (before paint)
     imgEl.style.willChange = 'transform, opacity';
     imgEl.style.opacity = '0';
     imgEl.style.transform = 'scale(0.98)';
 
-    // Next frame: animate to visible
     requestAnimationFrame(() => {
       imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
       imgEl.style.opacity = '1';
@@ -45,81 +32,145 @@ if (lightboxImgs.length > 0) {
     });
   }
 
-  function resetSwipeTransform(imgEl) {
+  function fadeSwitchTo(index) {
+    // used by showImage to fade between images
+    const imgEl = getLightboxImgEl();
     if (!imgEl) return;
 
-    imgEl.style.transition = 'transform 180ms ease';
-    imgEl.style.transform = 'translateX(0) scale(1)';
+    imgEl.style.transition = 'opacity 120ms ease';
+    imgEl.style.opacity = '0';
 
-    // Cleanup transition so it doesn't affect future changes
     setTimeout(() => {
-      if (!imgEl) return;
-      imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
-    }, 180);
+      imgEl.src = getFullSrc(index);
+      imgEl.alt = lightboxImgs[index].alt || '';
+
+      imgEl.style.transition = 'opacity 160ms ease';
+      imgEl.style.opacity = '1';
+
+      setTimeout(() => {
+        imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
+        imgEl.style.transform = 'translateX(0) scale(1)';
+      }, 180);
+    }, 120);
   }
 
-  function onTouchStart(e) {
-    if (!e.touches || e.touches.length !== 1) return;
+  // =====================
+  // Pointer Swipe (replaces touch swipe)
+  // =====================
 
-    const t = e.touches[0];
-    startX = t.clientX;
-    startY = t.clientY;
-    deltaX = 0;
-    deltaY = 0;
-    isSwiping = false;
+  let pStartX = 0;
+  let pStartY = 0;
+  let pDeltaX = 0;
+  let pDeltaY = 0;
+  let pStartTime = 0;
+  let swipeLocked = null;     // null | 'x' | 'y'
+  let activePointerId = null; // track single pointer
 
-    // If user starts touching, remove any lingering swipe transition
-    const imgEl = getLightboxImgEl();
-    if (imgEl) {
-      imgEl.style.transition = 'transform 0ms linear';
-    }
+  const INTENT_PX = 12;        // movement before locking direction
+  const SWIPE_DIST = 70;       // distance trigger
+  const SWIPE_VELOCITY = 0.35; // speed trigger (px/ms)
+  const DRAG_FACTOR = 0.9;     // how much the image follows finger
+
+  function setDragTransform(x) {
+    const img = getLightboxImgEl();
+    if (!img) return;
+    img.style.transition = 'none';
+    img.style.transform = `translateX(${x}px) scale(1)`;
   }
 
-  function onTouchMove(e) {
-    if (!e.touches || e.touches.length !== 1) return;
+  function snapBack() {
+    const img = getLightboxImgEl();
+    if (!img) return;
+    img.style.transition = 'transform 160ms ease';
+    img.style.transform = 'translateX(0) scale(1)';
+  }
 
-    const t = e.touches[0];
-    deltaX = t.clientX - startX;
-    deltaY = t.clientY - startY;
+  function snapOut(dir) {
+    // dir: +1 (next) or -1 (prev)
+    const img = getLightboxImgEl();
+    if (!img) return;
 
-    // If gesture is mostly horizontal, treat as swipe and prevent page scroll
-    if (Math.abs(deltaX) > Math.abs(deltaY) * SWIPE_LOCK_RATIO) {
-      isSwiping = true;
-      e.preventDefault(); // requires { passive: false }
+    img.style.transition = 'transform 140ms ease';
+    img.style.transform = `translateX(${dir * -80}px) scale(1)`;
 
-      // Swipe follow animation (subtle)
-      const imgEl = getLightboxImgEl();
-      if (imgEl) {
-        imgEl.style.transform = `translateX(${deltaX * 0.25}px) scale(0.98)`;
+    setTimeout(() => {
+      const i = getLightboxImgEl();
+      if (!i) return;
+      i.style.transition = 'transform 0ms linear';
+      i.style.transform = 'translateX(0) scale(1)';
+    }, 140);
+  }
+
+  function onPointerDown(e) {
+    if (!lightboxEl) return;
+    if (activePointerId !== null) return;
+
+    activePointerId = e.pointerId;
+    lightboxEl.setPointerCapture?.(activePointerId);
+
+    pStartX = e.clientX;
+    pStartY = e.clientY;
+    pDeltaX = 0;
+    pDeltaY = 0;
+    pStartTime = performance.now();
+    swipeLocked = null;
+  }
+
+  function onPointerMove(e) {
+    if (!lightboxEl) return;
+    if (e.pointerId !== activePointerId) return;
+
+    pDeltaX = e.clientX - pStartX;
+    pDeltaY = e.clientY - pStartY;
+
+    // Lock direction after intent threshold
+    if (swipeLocked === null) {
+      if (Math.abs(pDeltaX) > INTENT_PX || Math.abs(pDeltaY) > INTENT_PX) {
+        swipeLocked = (Math.abs(pDeltaX) > Math.abs(pDeltaY)) ? 'x' : 'y';
+      } else {
+        return;
       }
     }
+
+    // Horizontal swipe: prevent scroll + drag image
+    if (swipeLocked === 'x') {
+      e.preventDefault();
+      setDragTransform(pDeltaX * DRAG_FACTOR);
+    }
   }
 
-  function onTouchEnd() {
-    const imgEl = getLightboxImgEl();
+  function onPointerUp(e) {
+    if (!lightboxEl) return;
+    if (e.pointerId !== activePointerId) return;
 
-    if (!isSwiping) {
-      // restore transition if it was removed
-      if (imgEl) imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
+    const dt = Math.max(1, performance.now() - pStartTime);
+    const vx = Math.abs(pDeltaX) / dt; // px/ms
+
+    // reset pointer state
+    activePointerId = null;
+    swipeLocked = null;
+
+    const shouldSwipe = (Math.abs(pDeltaX) > SWIPE_DIST) || (vx > SWIPE_VELOCITY);
+
+    if (!shouldSwipe) {
+      snapBack();
       return;
     }
 
-    // If too vertical or too short -> just reset the transform
-    if (Math.abs(deltaY) > SWIPE_MAX_Y || Math.abs(deltaX) < SWIPE_MIN_X) {
-      resetSwipeTransform(imgEl);
-      return;
-    }
-
-    // Trigger navigation
-    if (deltaX < 0) {
-      nextImage(); // swipe left -> next
+    if (pDeltaX < 0) {
+      // swipe left -> next
+      snapOut(+1);
+      nextImage();
     } else {
-      prevImage(); // swipe right -> prev
+      // swipe right -> prev
+      snapOut(-1);
+      prevImage();
     }
-
-    // After switching, reset transform (new image should be centered)
-    resetSwipeTransform(imgEl);
   }
+
+  // =====================
+  // Image switching logic
+  // =====================
 
   function getFullSrc(index) {
     const img = lightboxImgs[index];
@@ -136,27 +187,7 @@ if (lightboxImgs.length > 0) {
 
   function showImage(index) {
     currentIndex = (index + lightboxImgs.length) % lightboxImgs.length;
-
-    const imgEl = getLightboxImgEl();
-    if (!imgEl) return;
-
-    // Quick fade during switch (JS-only)
-    imgEl.style.transition = 'opacity 120ms ease';
-    imgEl.style.opacity = '0';
-
-    setTimeout(() => {
-      imgEl.src = getFullSrc(currentIndex);
-      imgEl.alt = lightboxImgs[currentIndex].alt || '';
-
-      // Fade back in
-      imgEl.style.transition = 'opacity 160ms ease';
-      imgEl.style.opacity = '1';
-
-      // Restore standard transitions
-      setTimeout(() => {
-        imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
-      }, 180);
-    }, 120);
+    fadeSwitchTo(currentIndex);
   }
 
   function nextImage() {
@@ -191,10 +222,11 @@ if (lightboxImgs.length > 0) {
 
     document.removeEventListener('keydown', onLightboxKeydown);
 
-    // Remove touch listeners
-    lightboxEl.removeEventListener('touchstart', onTouchStart);
-    lightboxEl.removeEventListener('touchmove', onTouchMove);
-    lightboxEl.removeEventListener('touchend', onTouchEnd);
+    // Remove pointer listeners
+    lightboxEl.removeEventListener('pointerdown', onPointerDown);
+    lightboxEl.removeEventListener('pointermove', onPointerMove);
+    lightboxEl.removeEventListener('pointerup', onPointerUp);
+    lightboxEl.removeEventListener('pointercancel', onPointerUp);
 
     lightboxEl.remove();
     lightboxEl = null;
@@ -256,10 +288,11 @@ if (lightboxImgs.length > 0) {
     // Keyboard
     document.addEventListener('keydown', onLightboxKeydown);
 
-    // Touch swipe (important: touchmove must be passive:false to allow preventDefault)
-    lightboxEl.addEventListener('touchstart', onTouchStart, { passive: true });
-    lightboxEl.addEventListener('touchmove', onTouchMove, { passive: false });
-    lightboxEl.addEventListener('touchend', onTouchEnd, { passive: true });
+    // Pointer swipe (better than touch)
+    lightboxEl.addEventListener('pointerdown', onPointerDown);
+    lightboxEl.addEventListener('pointermove', onPointerMove, { passive: false });
+    lightboxEl.addEventListener('pointerup', onPointerUp);
+    lightboxEl.addEventListener('pointercancel', onPointerUp);
 
     // JS-only open animation
     animateOpen(fullImg);

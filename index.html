@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Hlubek Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patrick Hlubek Portfolio</title>
 
-    <link rel="stylesheet" href="styles.css?v=4">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -24,52 +24,86 @@
 
 <!-- My Work -->
 <section class="my-work" id="work">
-    <h2 class="section__title section__title--work">My Work</h2>
-    <p class="section__subtitle section__subtitle--work">
-        A selection of my range of work
+  <h2 class="section__title section__title--work">My Work</h2>
+  <p class="section__subtitle section__subtitle--work">
+    A selection of my range of work
+  </p>
+
+  <!-- ✅ Category Switch (Selected Works / PATMAST) -->
+  <div class="work-switch" role="tablist" aria-label="Work categories">
+    <button class="work-switch__btn is-active" type="button" data-target="selected" role="tab" aria-selected="true">
+      Selected Works
+    </button>
+    <button class="work-switch__btn" type="button" data-target="patmast" role="tab" aria-selected="false">
+      PATMAST
+    </button>
+  </div>
+
+  <!-- ✅ Selected Works (default visible) -->
+  <div class="work-panel is-active" data-panel="selected">
+    <div class="portfolio">
+      <a href="assets/portfolio/Fist-Hunter.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/Fist-Hunter_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/Runner.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/Runner_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/Cave%20Man.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/Cave%20Man_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/1%20Portfolio.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/1%20Portfolio_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/2%20PORTFOLIO.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/2%20PORTFOLIO_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/Char%20Illu%20Kopie.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/Char%20Illu%20Kopie_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/Villager%20worker.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/Villager%20worker_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/Char%20and%20Props.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/Char%20and%20Props_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/Carman.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/Carman_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+
+      <a href="assets/portfolio/RandomCharacter2.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/RandomCharacter2_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+    </div>
+  </div>
+
+  <!-- ✅ PATMAST (hidden until click) -->
+  <div class="work-panel" data-panel="patmast">
+    <!-- optional: little intro line under the buttons -->
+    <p class="work-panel__intro">
+      <strong>Kleidung als Träger von Bedeutung.</strong> PATMAST übersetzt kulturelle Konzepte
+      (z. B. taiwanische Mythologie, japanische Ästhetiken, chinesische Bildtraditionen)
+      in zeitgenössische visuelle Formen.
     </p>
 
     <div class="portfolio">
-          <a href="assets/portfolio/Fist-Hunter.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/Fist-Hunter_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
+      <!-- Beispiel-Items: ersetze einfach die Bildpfade -->
+      <a href="assets/portfolio/PATMAST-01.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/PATMAST-01_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
 
-          <a href="assets/portfolio/Runner.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/Runner_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/Cave%20Man.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/Cave%20Man_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/1%20Portfolio.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/1%20Portfolio_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/2%20PORTFOLIO.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/2%20PORTFOLIO_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/Char%20Illu%20Kopie.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/Char%20Illu%20Kopie_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/Villager%20worker.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/Villager%20worker_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/Char%20and%20Props.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/Char%20and%20Props_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/Carman.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/Carman_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-
-          <a href="assets/portfolio/RandomCharacter2.webp" class="portfolio__item">
-            <img src="assets/portfolio/thumb/RandomCharacter2_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
-          </a>
-</div>
+      <a href="assets/portfolio/PATMAST-02.webp" class="portfolio__item">
+        <img src="assets/portfolio/thumb/PATMAST-02_thumb.webp" loading="lazy" alt="" class="portfolio__img js-lightbox">
+      </a>
+    </div>
+  </div>
 
 </section>
 
@@ -78,38 +112,63 @@
 
 <!-- Footer -->
 <footer class="footer">
-    <a href="mailto:PatrickHlubek@proton.me" class="footer-link">
-        PatrickHlubek@proton.me
-    </a>
+  <a href="mailto:PatrickHlubek@proton.me" class="footer-link">
+    PatrickHlubek@proton.me
+  </a>
 
-    <ul class="social-list">
-        <li class="social-list__item">
-            <a class="social-list__link" href="https://www.instagram.com/patmast/" target="_blank" rel="noopener">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-        </li>
-        <li class="social-list__item">
-            <a class="social-list__link" href="https://www.artstation.com/patmast" target="_blank" rel="noopener">
-                <i class="fa-brands fa-artstation"></i>
-            </a>
-        </li>
-        <li class="social-list__item">
-            <a class="social-list__link"
-               href="https://www.linkedin.com/in/patrick-hlubek-010282272/"
-               target="_blank" rel="noopener">
-                <i class="fa-brands fa-linkedin"></i>
-            </a>
-        </li>
-    </ul>
+  <ul class="social-list">
+    <li class="social-list__item">
+      <a class="social-list__link" href="https://www.instagram.com/patmast/" target="_blank" rel="noopener">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+    </li>
+    <li class="social-list__item">
+      <a class="social-list__link" href="https://www.artstation.com/patmast" target="_blank" rel="noopener">
+        <i class="fa-brands fa-artstation"></i>
+      </a>
+    </li>
+    <li class="social-list__item">
+      <a class="social-list__link"
+         href="https://www.linkedin.com/in/patrick-hlubek-010282272/"
+         target="_blank" rel="noopener">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+    </li>
+  </ul>
 </footer>
 
 <script src="index.js"></script>
 
+<!-- ✅ tiny switch script (keep it here or move into index.js) -->
+<script>
+  (function () {
+    const btns = Array.from(document.querySelectorAll('.work-switch__btn[data-target]'));
+    const panels = Array.from(document.querySelectorAll('.work-panel[data-panel]'));
+    if (btns.length === 0 || panels.length === 0) return;
+
+    function setPanel(key) {
+      btns.forEach(b => {
+        const active = b.dataset.target === key;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      panels.forEach(p => {
+        p.classList.toggle('is-active', p.dataset.panel === key);
+      });
+
+      // optional: remember selection
+      try { localStorage.setItem('workTab', key); } catch {}
+    }
+
+    // init
+    let saved = null;
+    try { saved = localStorage.getItem('workTab'); } catch {}
+    setPanel(saved || 'selected');
+
+    btns.forEach(b => b.addEventListener('click', () => setPanel(b.dataset.target)));
+  })();
+</script>
+
 </body>
 </html>
-
-
-
-
-
-

@@ -1,5 +1,5 @@
 // =====================
-// Lightbox (Fullscreen Images + Arrows + Pointer Swipe + Animations)
+// Lightbox (Fullscreen Images + Arrows + Pointer Swipe + Animations + Smart Preload)
 // Thumbnail grid -> Full image via <a href="FULL.webp">
 // =====================
 
@@ -33,7 +33,6 @@ if (lightboxImgs.length > 0) {
   }
 
   function fadeSwitchTo(index) {
-    // used by showImage to fade between images
     const imgEl = getLightboxImgEl();
     if (!imgEl) return;
 
@@ -52,6 +51,44 @@ if (lightboxImgs.length > 0) {
         imgEl.style.transform = 'translateX(0) scale(1)';
       }, 180);
     }, 120);
+  }
+
+  // =====================
+  // Image source + Smart preload
+  // =====================
+
+  function getFullSrc(index) {
+    const img = lightboxImgs[index];
+    if (!img) return '';
+
+    const link = img.closest('a');
+    const href = link ? link.getAttribute('href') : '';
+
+    // Fallback if href is missing or "#"
+    if (!href || href === '#') return img.src;
+
+    return href;
+  }
+
+  function preloadNeighbors() {
+    // Only preload when lightbox is open
+    if (!lightboxEl) return;
+    if (lightboxImgs.length < 2) return;
+
+    const nextIndex = (currentIndex + 1) % lightboxImgs.length;
+    const prevIndex = (currentIndex - 1 + lightboxImgs.length) % lightboxImgs.length;
+
+    const nextSrc = getFullSrc(nextIndex);
+    const prevSrc = getFullSrc(prevIndex);
+
+    if (nextSrc) {
+      const n = new Image();
+      n.src = nextSrc;
+    }
+    if (prevSrc) {
+      const p = new Image();
+      p.src = prevSrc;
+    }
   }
 
   // =====================
@@ -86,7 +123,6 @@ if (lightboxImgs.length > 0) {
   }
 
   function snapOut(dir) {
-    // dir: +1 (next) or -1 (prev)
     const img = getLightboxImgEl();
     if (!img) return;
 
@@ -158,11 +194,9 @@ if (lightboxImgs.length > 0) {
     }
 
     if (pDeltaX < 0) {
-      // swipe left -> next
       snapOut(+1);
       nextImage();
     } else {
-      // swipe right -> prev
       snapOut(-1);
       prevImage();
     }
@@ -172,22 +206,12 @@ if (lightboxImgs.length > 0) {
   // Image switching logic
   // =====================
 
-  function getFullSrc(index) {
-    const img = lightboxImgs[index];
-    if (!img) return '';
-
-    const link = img.closest('a');
-    const href = link ? link.getAttribute('href') : '';
-
-    // Fallback if href is missing or "#"
-    if (!href || href === '#') return img.src;
-
-    return href;
-  }
-
   function showImage(index) {
     currentIndex = (index + lightboxImgs.length) % lightboxImgs.length;
     fadeSwitchTo(currentIndex);
+
+    // ✅ Smart preload for smooth next/prev
+    preloadNeighbors();
   }
 
   function nextImage() {
@@ -296,6 +320,9 @@ if (lightboxImgs.length > 0) {
 
     // JS-only open animation
     animateOpen(fullImg);
+
+    // ✅ Smart preload shortly after open (keeps open feeling snappy)
+    setTimeout(preloadNeighbors, 150);
   }
 
   // Attach click listeners

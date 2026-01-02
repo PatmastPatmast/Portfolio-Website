@@ -636,6 +636,9 @@ header{
     opacity: 0;
     pointer-events: none;
     transition: opacity 200ms ease;
+
+    /* ✅ wichtig für Touch Swipe */
+    touch-action: pan-y;
 }
 
 .lightbox.is-open {
@@ -689,6 +692,7 @@ header{
     font-size: 2.2rem;
     line-height: 1;
 }
+
 
 
 

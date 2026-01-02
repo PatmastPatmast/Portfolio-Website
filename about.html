@@ -4,28 +4,110 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Me · Patrick Hlubek</title>
+
   <link rel="stylesheet" href="styles.css?v=4" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-<nav class="site-nav">
-  <ul class="site-nav__list">
-    <li><a href="index.html">My Work</a></li>
-    <li><a href="writing.html">Writing</a></li>
-    <li><a href="about.html">About Me</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
-</nav>
+  <nav class="site-nav">
+    <ul class="site-nav__list">
+      <li><a href="./index.html#work">My Work</a></li>
+      <li><a href="./writing.html">Writing</a></li>
+      <li><a href="./about.html">About Me</a></li>
+      <li><a href="./index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<section class="about-me" id="about">
-  <!-- dein About Me Block 1:1 hier rein -->
-</section>
+  <!-- Introduction -->
+  <section class="intro" id="home">
+    <h1 class="section__title section__title--intro">
+      Hi, I am <strong>Patrick Hlubek</strong>
+    </h1>
+    <p class="section__subtitle section__subtitle--intro">2D Artist</p>
+    <img src="Patrick Hlubek smiling.jpg"
+         alt="a picture of Patrick Hlubek smiling"
+         class="intro__img">
+  </section>
 
-<footer class="footer">
-  <!-- dein Footer -->
-</footer>
+  <!-- My Services -->
+  <section class="my-services" id="services">
+    <h2 class="section__title section__title--services">What I do</h2>
+
+    <div class="services">
+      <div class="service">
+        <h3>Prop Design</h3>
+      </div>
+
+      <div class="service">
+        <h3>Character Design</h3>
+      </div>
+
+      <div class="service">
+        <h3>Environment Design</h3>
+      </div>
+    </div>
+
+    <!-- Auf about.html sinnvoller: direkt zur Work-Seite springen -->
+    <a href="./index.html#work" class="btn">My Work</a>
+  </section>
+
+  <!-- About Me -->
+  <section class="about-me" id="about">
+    <h2 class="section__title section__title--about">Who I am</h2>
+    <p class="section__subtitle section__subtitle--about">Artist – Designer</p>
+
+    <div class="about-me__body">
+      <p>
+        I’m a concept artist and visual storyteller working across character design,
+        fashion, and cultural research. My work bridges visual development with
+        cultural narratives, exploring how clothing, mythology, and identity intersect.
+      </p>
+
+      <p>
+        With a background in East Asian Studies and a strong foundation in digital
+        painting and design, I work on projects that range from editorial worldbuilding
+        to narrative concept art. I'm especially interested in fashion as a medium of
+        storytelling and emotional symbolism.
+      </p>
+
+      <p>
+        I’m currently developing a visual platform exploring speculative fashion
+        and cultural memory.
+      </p>
+    </div>
+
+    <img src="About Me.jpeg" alt="About Me" class="about-me__img">
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="mailto:PatrickHlubek@proton.me" class="footer-link">
+      PatrickHlubek@proton.me
+    </a>
+
+    <ul class="social-list">
+      <li class="social-list__item">
+        <a class="social-list__link" href="https://www.instagram.com/patmast/" target="_blank" rel="noopener">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </li>
+      <li class="social-list__item">
+        <a class="social-list__link" href="https://www.artstation.com/patmast" target="_blank" rel="noopener">
+          <i class="fa-brands fa-artstation"></i>
+        </a>
+      </li>
+      <li class="social-list__item">
+        <a class="social-list__link"
+           href="https://www.linkedin.com/in/patrick-hlubek-010282272/"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+    </ul>
+  </footer>
 
 </body>
 </html>

@@ -1,60 +1,21 @@
 // =====================
-// Lightbox (Fullscreen Images + Arrows + Pointer Swipe + Animations + Smart Preload)
+// Lightbox (Fullscreen Images + Arrows + Keyboard + Pointer Swipe + Animations + Smart Preload)
 // Thumbnail grid -> Full image via <a href="FULL.webp">
 // =====================
 
-// Collect thumbnails
-const lightboxImgs = Array.from(document.querySelectorAll('.js-lightbox'));
-
-// If no lightbox images on this page, do nothing
-if (lightboxImgs.length > 0) {
+(() => {
+  // Collect thumbnails
+  const lightboxImgs = Array.from(document.querySelectorAll('.js-lightbox'));
+  if (lightboxImgs.length === 0) return; // nothing to do on this page
 
   let currentIndex = 0;
   let lightboxEl = null;
+  let lightboxImgEl = null; // the <img> inside lightbox
   let prevBodyOverflow = '';
-
-  function getLightboxImgEl() {
-    return document.querySelector('.lightbox__img');
-  }
-
-  // ---- JS-only animation helpers ----
-  function animateOpen(imgEl) {
-    if (!imgEl) return;
-
-    imgEl.style.willChange = 'transform, opacity';
-    imgEl.style.opacity = '0';
-    imgEl.style.transform = 'scale(0.98)';
-
-    requestAnimationFrame(() => {
-      imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
-      imgEl.style.opacity = '1';
-      imgEl.style.transform = 'scale(1)';
-    });
-  }
-
-  function fadeSwitchTo(index) {
-    const imgEl = getLightboxImgEl();
-    if (!imgEl) return;
-
-    imgEl.style.transition = 'opacity 120ms ease';
-    imgEl.style.opacity = '0';
-
-    setTimeout(() => {
-      imgEl.src = getFullSrc(index);
-      imgEl.alt = lightboxImgs[index].alt || '';
-
-      imgEl.style.transition = 'opacity 160ms ease';
-      imgEl.style.opacity = '1';
-
-      setTimeout(() => {
-        imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
-        imgEl.style.transform = 'translateX(0) scale(1)';
-      }, 180);
-    }, 120);
-  }
+  let lastFocusedEl = null;
 
   // =====================
-  // Image source + Smart preload
+  // Helpers
   // =====================
 
   function getFullSrc(index) {
@@ -91,8 +52,45 @@ if (lightboxImgs.length > 0) {
     }
   }
 
+  function animateOpen(imgEl) {
+    if (!imgEl) return;
+
+    imgEl.style.willChange = 'transform, opacity';
+    imgEl.style.opacity = '0';
+    imgEl.style.transform = 'scale(0.98)';
+
+    requestAnimationFrame(() => {
+      imgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
+      imgEl.style.opacity = '1';
+      imgEl.style.transform = 'scale(1)';
+    });
+  }
+
+  function fadeSwitchTo(index) {
+    const imgEl = lightboxImgEl;
+    if (!imgEl) return;
+
+    imgEl.style.transition = 'opacity 120ms ease';
+    imgEl.style.opacity = '0';
+
+    setTimeout(() => {
+      imgEl.src = getFullSrc(index);
+      imgEl.alt = lightboxImgs[index].alt || '';
+
+      imgEl.style.transition = 'opacity 160ms ease';
+      imgEl.style.opacity = '1';
+
+      // Restore default transition after fade
+      setTimeout(() => {
+        if (!lightboxImgEl) return;
+        lightboxImgEl.style.transition = 'transform 220ms ease, opacity 220ms ease';
+        lightboxImgEl.style.transform = 'translateX(0) scale(1)';
+      }, 180);
+    }, 120);
+  }
+
   // =====================
-  // Pointer Swipe (replaces touch swipe)
+  // Pointer swipe (ONLY on image)
   // =====================
 
   let pStartX = 0;
@@ -109,40 +107,38 @@ if (lightboxImgs.length > 0) {
   const DRAG_FACTOR = 0.9;     // how much the image follows finger
 
   function setDragTransform(x) {
-    const img = getLightboxImgEl();
-    if (!img) return;
-    img.style.transition = 'none';
-    img.style.transform = `translateX(${x}px) scale(1)`;
+    if (!lightboxImgEl) return;
+    lightboxImgEl.style.transition = 'none';
+    lightboxImgEl.style.transform = `translateX(${x}px) scale(1)`;
   }
 
   function snapBack() {
-    const img = getLightboxImgEl();
-    if (!img) return;
-    img.style.transition = 'transform 160ms ease';
-    img.style.transform = 'translateX(0) scale(1)';
+    if (!lightboxImgEl) return;
+    lightboxImgEl.style.transition = 'transform 160ms ease';
+    lightboxImgEl.style.transform = 'translateX(0) scale(1)';
   }
 
   function snapOut(dir) {
-    const img = getLightboxImgEl();
-    if (!img) return;
+    // dir: +1 (next) or -1 (prev)
+    if (!lightboxImgEl) return;
 
-    img.style.transition = 'transform 140ms ease';
-    img.style.transform = `translateX(${dir * -80}px) scale(1)`;
+    lightboxImgEl.style.transition = 'transform 140ms ease';
+    lightboxImgEl.style.transform = `translateX(${dir * -80}px) scale(1)`;
 
     setTimeout(() => {
-      const i = getLightboxImgEl();
-      if (!i) return;
-      i.style.transition = 'transform 0ms linear';
-      i.style.transform = 'translateX(0) scale(1)';
+      if (!lightboxImgEl) return;
+      lightboxImgEl.style.transition = 'transform 0ms linear';
+      lightboxImgEl.style.transform = 'translateX(0) scale(1)';
     }, 140);
   }
 
   function onPointerDown(e) {
-    if (!lightboxEl) return;
+    if (!lightboxEl || !lightboxImgEl) return;
     if (activePointerId !== null) return;
 
     activePointerId = e.pointerId;
-    lightboxEl.setPointerCapture?.(activePointerId);
+    // capture on the image element (not overlay)
+    lightboxImgEl.setPointerCapture?.(activePointerId);
 
     pStartX = e.clientX;
     pStartY = e.clientY;
@@ -153,7 +149,7 @@ if (lightboxImgs.length > 0) {
   }
 
   function onPointerMove(e) {
-    if (!lightboxEl) return;
+    if (!lightboxEl || !lightboxImgEl) return;
     if (e.pointerId !== activePointerId) return;
 
     pDeltaX = e.clientX - pStartX;
@@ -176,7 +172,7 @@ if (lightboxImgs.length > 0) {
   }
 
   function onPointerUp(e) {
-    if (!lightboxEl) return;
+    if (!lightboxEl || !lightboxImgEl) return;
     if (e.pointerId !== activePointerId) return;
 
     const dt = Math.max(1, performance.now() - pStartTime);
@@ -203,14 +199,12 @@ if (lightboxImgs.length > 0) {
   }
 
   // =====================
-  // Image switching logic
+  // Navigation logic
   // =====================
 
   function showImage(index) {
     currentIndex = (index + lightboxImgs.length) % lightboxImgs.length;
     fadeSwitchTo(currentIndex);
-
-    // ✅ Smart preload for smooth next/prev
     preloadNeighbors();
   }
 
@@ -228,38 +222,49 @@ if (lightboxImgs.length > 0) {
     if (ev.key === 'Escape') {
       ev.preventDefault();
       closeLightbox();
-    }
-
-    if (ev.key === 'ArrowRight') {
+    } else if (ev.key === 'ArrowRight') {
       ev.preventDefault();
       nextImage();
-    }
-
-    if (ev.key === 'ArrowLeft') {
+    } else if (ev.key === 'ArrowLeft') {
       ev.preventDefault();
       prevImage();
     }
   }
+
+  // =====================
+  // Open / Close
+  // =====================
 
   function closeLightbox() {
     if (!lightboxEl) return;
 
     document.removeEventListener('keydown', onLightboxKeydown);
 
-    // Remove pointer listeners
-    lightboxEl.removeEventListener('pointerdown', onPointerDown);
-    lightboxEl.removeEventListener('pointermove', onPointerMove);
-    lightboxEl.removeEventListener('pointerup', onPointerUp);
-    lightboxEl.removeEventListener('pointercancel', onPointerUp);
+    // Remove pointer listeners from the image (safe)
+    if (lightboxImgEl) {
+      lightboxImgEl.removeEventListener('pointerdown', onPointerDown);
+      lightboxImgEl.removeEventListener('pointermove', onPointerMove);
+      lightboxImgEl.removeEventListener('pointerup', onPointerUp);
+      lightboxImgEl.removeEventListener('pointercancel', onPointerUp);
+    }
 
     lightboxEl.remove();
     lightboxEl = null;
+    lightboxImgEl = null;
 
     document.body.style.overflow = prevBodyOverflow;
+
+    // restore focus (nice UX)
+    if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+      try { lastFocusedEl.focus(); } catch {}
+    }
+    lastFocusedEl = null;
   }
 
   function openLightbox(index) {
     currentIndex = index;
+
+    lastFocusedEl = document.activeElement;
 
     // Overlay
     lightboxEl = document.createElement('div');
@@ -296,14 +301,24 @@ if (lightboxImgs.length > 0) {
     lightboxEl.appendChild(btnClose);
     document.body.appendChild(lightboxEl);
 
+    // Save reference to lightbox image
+    lightboxImgEl = fullImg;
+
     // Lock scroll
     prevBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
+    // Ensure keyboard arrows always work (focus overlay)
+    if (document.activeElement) {
+      try { document.activeElement.blur(); } catch {}
+    }
+    lightboxEl.setAttribute('tabindex', '-1');
+    try { lightboxEl.focus(); } catch {}
+
     // Click outside closes
     lightboxEl.addEventListener('click', closeLightbox);
 
-    // Stop propagation
+    // Stop propagation (so clicks on image/buttons don't close)
     fullImg.addEventListener('click', (e) => e.stopPropagation());
     btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
     btnNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
@@ -312,25 +327,28 @@ if (lightboxImgs.length > 0) {
     // Keyboard
     document.addEventListener('keydown', onLightboxKeydown);
 
-    // Pointer swipe (better than touch)
-    lightboxEl.addEventListener('pointerdown', onPointerDown);
-    lightboxEl.addEventListener('pointermove', onPointerMove, { passive: false });
-    lightboxEl.addEventListener('pointerup', onPointerUp);
-    lightboxEl.addEventListener('pointercancel', onPointerUp);
+    // Pointer swipe ONLY on image (prevents button click conflicts)
+    fullImg.addEventListener('pointerdown', onPointerDown);
+    fullImg.addEventListener('pointermove', onPointerMove, { passive: false });
+    fullImg.addEventListener('pointerup', onPointerUp);
+    fullImg.addEventListener('pointercancel', onPointerUp);
 
     // JS-only open animation
     animateOpen(fullImg);
 
-    // ✅ Smart preload shortly after open (keeps open feeling snappy)
+    // Smart preload shortly after open
     setTimeout(preloadNeighbors, 150);
   }
 
-  // Attach click listeners
+  // =====================
+  // Attach thumbnail listeners
+  // =====================
+
   lightboxImgs.forEach((img, index) => {
     img.addEventListener('click', (e) => {
       const link = img.closest('a');
-      if (link) e.preventDefault();
+      if (link) e.preventDefault(); // prevent navigation to full image
       openLightbox(index);
     });
   });
-}
+})();

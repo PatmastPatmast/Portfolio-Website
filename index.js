@@ -1,15 +1,14 @@
 // =====================
 // Lightbox (Fullscreen Images + Arrows)
-// Thumbnail grid -> Full image in lightbox via <a href="FULL.webp">
+// Thumbnail grid -> Full image via <a href="FULL.webp">
 // =====================
 
-// Collect thumbnails (the <img> elements in your grid)
+// Collect thumbnails
 const lightboxImgs = Array.from(document.querySelectorAll('.js-lightbox'));
 
-// If this page has no lightbox images (e.g., writing.html/about.html), stop safely.
-if (lightboxImgs.length === 0) {
-  // Nothing to do on this page.
-} else {
+// If no lightbox images on this page, do nothing
+if (lightboxImgs.length > 0) {
+
   let currentIndex = 0;
   let lightboxEl = null;
   let prevBodyOverflow = '';
@@ -17,28 +16,14 @@ if (lightboxImgs.length === 0) {
   function getFullSrc(index) {
     const img = lightboxImgs[index];
     if (!img) return '';
+
     const link = img.closest('a');
-    // Use <a href="..."> as full image, fallback to thumbnail src if missing
-    return (link && link.getAttribute('href')) ? link.getAttribute('href') : img.src;
-  }
+    const href = link ? link.getAttribute('href') : '';
 
-  function preloadNeighbors() {
-    if (lightboxImgs.length < 2) return;
+    // Fallback if href is missing or "#"
+    if (!href || href === '#') return img.src;
 
-    const nextIndex = (currentIndex + 1) % lightboxImgs.length;
-    const prevIndex = (currentIndex - 1 + lightboxImgs.length) % lightboxImgs.length;
-
-    const nextSrc = getFullSrc(nextIndex);
-    const prevSrc = getFullSrc(prevIndex);
-
-    if (nextSrc) {
-      const n = new Image();
-      n.src = nextSrc;
-    }
-    if (prevSrc) {
-      const p = new Image();
-      p.src = prevSrc;
-    }
+    return href;
   }
 
   function showImage(index) {
@@ -49,8 +34,6 @@ if (lightboxImgs.length === 0) {
 
     imgEl.src = getFullSrc(currentIndex);
     imgEl.alt = lightboxImgs[currentIndex].alt || '';
-
-    preloadNeighbors();
   }
 
   function nextImage() {
@@ -68,10 +51,12 @@ if (lightboxImgs.length === 0) {
       ev.preventDefault();
       closeLightbox();
     }
+
     if (ev.key === 'ArrowRight') {
       ev.preventDefault();
       nextImage();
     }
+
     if (ev.key === 'ArrowLeft') {
       ev.preventDefault();
       prevImage();
@@ -97,7 +82,7 @@ if (lightboxImgs.length === 0) {
     lightboxEl.setAttribute('role', 'dialog');
     lightboxEl.setAttribute('aria-modal', 'true');
 
-    // Image (fullsize)
+    // Image
     const fullImg = document.createElement('img');
     fullImg.className = 'lightbox__img';
     fullImg.src = getFullSrc(currentIndex);
@@ -107,12 +92,12 @@ if (lightboxImgs.length === 0) {
     const btnPrev = document.createElement('button');
     btnPrev.className = 'lightbox__btn lightbox__btn--prev';
     btnPrev.setAttribute('aria-label', 'Previous image');
-    btnPrev.innerHTML = '&#10094;'; // ‹
+    btnPrev.innerHTML = '&#10094;';
 
     const btnNext = document.createElement('button');
     btnNext.className = 'lightbox__btn lightbox__btn--next';
     btnNext.setAttribute('aria-label', 'Next image');
-    btnNext.innerHTML = '&#10095;'; // ›
+    btnNext.innerHTML = '&#10095;';
 
     const btnClose = document.createElement('button');
     btnClose.className = 'lightbox__btn lightbox__btn--close';
@@ -133,7 +118,7 @@ if (lightboxImgs.length === 0) {
     // Click outside closes
     lightboxEl.addEventListener('click', closeLightbox);
 
-    // Stop propagation (so clicks on image/buttons don't close)
+    // Stop propagation
     fullImg.addEventListener('click', (e) => e.stopPropagation());
     btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
     btnNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
@@ -141,16 +126,13 @@ if (lightboxImgs.length === 0) {
 
     // Keyboard
     document.addEventListener('keydown', onLightboxKeydown);
-
-    // Preload neighbors for instant arrow navigation
-    preloadNeighbors();
   }
 
-  // Attach click listeners to thumbnails
+  // Attach click listeners
   lightboxImgs.forEach((img, index) => {
     img.addEventListener('click', (e) => {
       const link = img.closest('a');
-      if (link) e.preventDefault(); // prevents "#" jump or navigating to href
+      if (link) e.preventDefault();
       openLightbox(index);
     });
   });

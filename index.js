@@ -1,5 +1,5 @@
 // =====================
-// Lightbox (Fullscreen Images + Arrows)
+// Lightbox (Fullscreen Images + Arrows + Touch Swipe)
 // Thumbnail grid -> Full image via <a href="FULL.webp">
 // =====================
 
@@ -12,6 +12,55 @@ if (lightboxImgs.length > 0) {
   let currentIndex = 0;
   let lightboxEl = null;
   let prevBodyOverflow = '';
+
+  // ---- Touch swipe state ----
+  let startX = 0;
+  let startY = 0;
+  let deltaX = 0;
+  let deltaY = 0;
+  let isSwiping = false;
+
+  const SWIPE_MIN_X = 50;        // min horizontal distance to count as swipe
+  const SWIPE_MAX_Y = 60;        // if vertical movement too large, ignore
+  const SWIPE_LOCK_RATIO = 1.2;  // horizontal must be clearly stronger than vertical
+
+  function onTouchStart(e) {
+    if (!e.touches || e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+    deltaX = 0;
+    deltaY = 0;
+    isSwiping = false;
+  }
+
+  function onTouchMove(e) {
+    if (!e.touches || e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+    deltaX = t.clientX - startX;
+    deltaY = t.clientY - startY;
+
+    // If gesture is mostly horizontal, treat as swipe and prevent page scroll
+    if (Math.abs(deltaX) > Math.abs(deltaY) * SWIPE_LOCK_RATIO) {
+      isSwiping = true;
+      e.preventDefault(); // requires { passive: false }
+    }
+  }
+
+  function onTouchEnd() {
+    if (!isSwiping) return;
+
+    if (Math.abs(deltaY) > SWIPE_MAX_Y) return;
+    if (Math.abs(deltaX) < SWIPE_MIN_X) return;
+
+    if (deltaX < 0) {
+      nextImage(); // swipe left -> next
+    } else {
+      prevImage(); // swipe right -> prev
+    }
+  }
 
   function getFullSrc(index) {
     const img = lightboxImgs[index];
@@ -67,6 +116,12 @@ if (lightboxImgs.length > 0) {
     if (!lightboxEl) return;
 
     document.removeEventListener('keydown', onLightboxKeydown);
+
+    // Remove touch listeners
+    lightboxEl.removeEventListener('touchstart', onTouchStart);
+    lightboxEl.removeEventListener('touchmove', onTouchMove);
+    lightboxEl.removeEventListener('touchend', onTouchEnd);
+
     lightboxEl.remove();
     lightboxEl = null;
 
@@ -126,6 +181,11 @@ if (lightboxImgs.length > 0) {
 
     // Keyboard
     document.addEventListener('keydown', onLightboxKeydown);
+
+    // Touch swipe (important: touchmove must be passive:false to allow preventDefault)
+    lightboxEl.addEventListener('touchstart', onTouchStart, { passive: true });
+    lightboxEl.addEventListener('touchmove', onTouchMove, { passive: false });
+    lightboxEl.addEventListener('touchend', onTouchEnd, { passive: true });
   }
 
   // Attach click listeners

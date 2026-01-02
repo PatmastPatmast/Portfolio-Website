@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Silhouette in Bewegung — Patrick Hlubek</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Optional aber empfohlen, weil du FontAwesome Icons im Footer nutzt -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
   <header style="padding: 1em;">
-    <a href="index.html#writing" class="btn">Back</a>
+    <a href="writing.html" class="btn">Back</a>
   </header>
 
   <main class="essay">
@@ -18,15 +21,56 @@
       <h1 class="essay__title">Silhouette in Bewegung</h1>
       <p class="essay__meta">31 December 2025</p>
 
-      <div class="essay__content">
-        <p>
-          Was macht Mode japanisch, chinesisch, taiwanisch oder westlich?
-          Diese Frage stellt sich, sobald man beginnt, über Mode nachzudenken. Die Begriffe, mit denen wir Mode ordnen, wirken dabei selbstverständlich, sind es aber nicht. Sie formen unseren Blick, lange bevor wir einzelne Kleidungsstücke betrachten.
-          Wenn man Mode grob entlang der Unterscheidung von West und Ost betrachtet, treten Unterschiede hervor, die sich weniger in Details als in grundlegenden Haltungen zeigen. Einer der auffälligsten Unterschiede liegt in der Silhouette des Körpers. Mode unterscheidet sich darin, wie sie sich zum Körper verhält . Fragen dazu beinhalten wie nah sie dem Körper kommt, wie viel Raum sie ihm lässt, wie sie ihn formt oder ihm folgt.
-          Man stelle sich vor, man ist in der Metropolregion Tokio unterwegs, sitzt draußen und beobachtet die vorbeiziehenden Menschenmassen.  
-          Unter den vielen Sinneseindrücken tritt ein visueller besonders hervor: Stoffe, ihre Falten, die sich im Wind bewegen. Die Kleidung scheint sich vom Körper zu lösen, ohne ihn zu verlassen. Es braucht keinen Wind, um den Stoff in Bewegung zu versetzen; vielmehr ist es die Silhouette der Kleidung selbst, die den Faltenwurf ermöglicht und durch die Bewegung der Körper aktiviert wird.
+      <!-- ✅ Language Switch (Dropdown mobile, Buttons desktop) -->
+      <div class="langswitch" aria-label="Language switch">
+        <label class="langswitch__label" for="langSelect">Language</label>
 
-        </p>
+        <select id="langSelect" class="langswitch__select">
+          <option value="de">Deutsch</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh">中文</option>
+          <option value="pl">Polski</option>
+        </select>
+
+        <div class="langbar" role="tablist" aria-label="Language">
+          <button class="langbtn is-active" data-lang="de" role="tab">Deutsch</button>
+          <button class="langbtn" data-lang="en" role="tab">English</button>
+          <button class="langbtn" data-lang="ja" role="tab">日本語</button>
+          <button class="langbtn" data-lang="zh" role="tab">中文</button>
+          <button class="langbtn" data-lang="pl" role="tab">Polski</button>
+        </div>
+      </div>
+
+      <!-- ✅ Content blocks per language -->
+      <div class="essay__content">
+
+        <div class="lang lang--active" data-lang="de">
+          <p>
+            Was macht Mode japanisch, chinesisch, taiwanisch oder westlich?
+            Diese Frage stellt sich, sobald man beginnt, über Mode nachzudenken. Die Begriffe, mit denen wir Mode ordnen, wirken dabei selbstverständlich, sind es aber nicht. Sie formen unseren Blick, lange bevor wir einzelne Kleidungsstücke betrachten.
+            Wenn man Mode grob entlang der Unterscheidung von West und Ost betrachtet, treten Unterschiede hervor, die sich weniger in Details als in grundlegenden Haltungen zeigen. Einer der auffälligsten Unterschiede liegt in der Silhouette des Körpers. Mode unterscheidet sich darin, wie sie sich zum Körper verhält . Fragen dazu beinhalten wie nah sie dem Körper kommt, wie viel Raum sie ihm lässt, wie sie ihn formt oder ihm folgt.
+            Man stelle sich vor, man ist in der Metropolregion Tokio unterwegs, sitzt draußen und beobachtet die vorbeiziehenden Menschenmassen.
+            Unter den vielen Sinneseindrücken tritt ein visueller besonders hervor: Stoffe, ihre Falten, die sich im Wind bewegen. Die Kleidung scheint sich vom Körper zu lösen, ohne ihn zu verlassen. Es braucht keinen Wind, um den Stoff in Bewegung zu versetzen; vielmehr ist es die Silhouette der Kleidung selbst, die den Faltenwurf ermöglicht und durch die Bewegung der Körper aktiviert wird.
+          </p>
+        </div>
+
+        <div class="lang" data-lang="en">
+          <p>[English version here]</p>
+        </div>
+
+        <div class="lang" data-lang="ja">
+          <p>[日本語版はこちら]</p>
+        </div>
+
+        <div class="lang" data-lang="zh">
+          <p>[中文版本在这里]</p>
+        </div>
+
+        <div class="lang" data-lang="pl">
+          <p>[Wersja polska tutaj]</p>
+        </div>
+
       </div>
     </article>
   </main>
@@ -52,5 +96,7 @@
     </ul>
   </footer>
 
+  <!-- ✅ Add your JS (can be index.js or lang.js) -->
+  <script src="index.js"></script>
 </body>
 </html>

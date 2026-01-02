@@ -754,6 +754,44 @@ header{
 .lang{ display:none; }
 .lang.lang--active{ display:block; }
 
+/* =====================
+   My Work: 2 Buttons Switch
+   ===================== */
+
+.work-switch{
+  display:flex;
+  justify-content:center;
+  gap:.75rem;
+  margin: 1.5rem auto 2rem;
+  flex-wrap: wrap;
+}
+
+.work-switch__btn{
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  color: var(--clr-light);
+  border-radius: 999px;
+  padding: .55rem 1.05rem;
+  font-weight: var(--fw-bold);
+  font-size: .85rem;
+  cursor:pointer;
+}
+
+.work-switch__btn.is-active{
+  background: var(--clr-accent);
+  color: var(--clr-dark);
+  border-color: transparent;
+}
+
+.work-panel{ display:none; }
+.work-panel.is-active{ display:block; }
+
+.work-panel__intro{
+  max-width: 900px;
+  margin: 0 auto 1.25rem;
+  opacity: .9;
+}
+
 
 
 

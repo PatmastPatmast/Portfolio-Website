@@ -830,13 +830,8 @@ header{
   grid-template-columns: 0.85fr 1.15fr;
 }
 
-.patmast-feature--reverse .patmast-feature__image{
-  order: 2;
-}
-
-.patmast-feature--reverse .patmast-feature__text{
-  order: 1;
-}
+.patmast-feature--reverse .patmast-feature__image{ order: 2; }
+.patmast-feature--reverse .patmast-feature__text{ order: 1; }
 
 .patmast-feature__image{
   display: flex;
@@ -853,12 +848,16 @@ header{
   display: block;
 }
 
+/* Tall / poster-like image */
 .patmast-feature__image--tall{
   justify-content: flex-end;
 }
 
 .patmast-feature__image--tall .patmast-feature__img{
-  max-width: 380px;
+  max-width: 420px; /* change back to 380px if you want smaller */
+  margin-left: auto;
+  margin-right: 0;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
 .patmast-feature__text{
@@ -903,16 +902,15 @@ header{
   .patmast-feature--reverse .patmast-feature__text{
     order: initial;
   }
-}
-.patmast-feature__image--tall .patmast-feature__img{
-  max-width: 380px;
-  margin-left: auto;
-  margin-right: 0;
+
+  /* On mobile, don't force the tall image to the right */
+  .patmast-feature__image--tall .patmast-feature__img{
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
-.patmast-feature__image--tall .patmast-feature__img{
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-}
+
 
 
 

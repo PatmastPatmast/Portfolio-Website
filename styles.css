@@ -910,3 +910,9 @@ header{
   margin-right: 0;
 }
 
+.patmast-feature__image--tall .patmast-feature__img{
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+
+

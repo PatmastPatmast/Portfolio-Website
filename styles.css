@@ -33,7 +33,9 @@
     }
 }
 
-/* General styles */
+/* =====================
+   General styles
+   ===================== */
 
 html {
     scroll-behavior: smooth;
@@ -57,14 +59,16 @@ img{
     max-width: 100%;
 }
 
-strong {font-weight: var(--fw-bold)}
+strong { font-weight: var(--fw-bold) }
 
 :focus {
     outline: 3px solid var(--clr-accent);
     outline-offset: 3px;
 }
 
-/* Typography */
+/* =====================
+   Typography
+   ===================== */
 
 h1,
 h2,
@@ -89,26 +93,6 @@ h3 { font-size: var(--fs-h3) }
     display: block;
 }
 
-/* Buttons */
-
-.btn{
-    display: inline-block;
-    padding: .5em 1.5em;
-    background: var(--clr-accent);
-    color: var(--clr-dark);
-    text-decoration: none;
-    cursor: pointer;
-    font-size: .8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: var(--fw-bold);
-    transition: transform 200ms ease-in-out;
-}
-
-.btn:hover {
-    transform: scale(1.1);
-}
-
 .section__subtitle{
     margin: 0;
     font-size: var(--fs-h3);
@@ -128,7 +112,31 @@ h3 { font-size: var(--fs-h3) }
     text-align: center;
 }
 
-/* Header */
+/* =====================
+   Buttons
+   ===================== */
+
+.btn{
+    display: inline-block;
+    padding: .5em 1.5em;
+    background: var(--clr-accent);
+    color: var(--clr-dark);
+    text-decoration: none;
+    cursor: pointer;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: var(--fw-bold);
+    transition: transform 200ms ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+/* =====================
+   Header / Nav (legacy burger nav)
+   ===================== */
 
 header{
     display: flex;
@@ -233,7 +241,9 @@ header{
 .hamburger::before { top: 6px; }
 .hamburger::after { bottom: 6px; }
 
-/* Intro section */
+/* =====================
+   Intro section
+   ===================== */
 
 .intro {
     position: relative;
@@ -321,7 +331,9 @@ header{
     color: var(--clr-accent);
 }
 
-/* My services section */
+/* =====================
+   My services section
+   ===================== */
 
 .my-services{
     background-color: var(--clr-accent);
@@ -368,7 +380,9 @@ header{
     }
 }
 
-/* About */
+/* =====================
+   About
+   ===================== */
 
 .about-me {
     max-width: 1000px;
@@ -411,7 +425,9 @@ header{
     }
 }
 
-/* My work */
+/* =====================
+   My work
+   ===================== */
 
 .my-work {
     background-color: var(--clr-dark);
@@ -419,7 +435,7 @@ header{
     text-align: center;
 }
 
-/* ✅ Portfolio grid (1 column mobile, 2 columns desktop) */
+/* Portfolio grid (1 column mobile, 2 columns desktop) */
 .portfolio{
     max-width: 1000px;
     margin: 2em auto 0;
@@ -456,7 +472,9 @@ header{
     transform: scale(1.03);
 }
 
-/* Footer */
+/* =====================
+   Footer
+   ===================== */
 
 .footer {
     background: #111;
@@ -497,7 +515,9 @@ header{
     padding: .5em;
 }
 
-/* Individual portfolio items styles */
+/* =====================
+   Individual portfolio items
+   ===================== */
 
 .portfolio-item-individual {
     padding: 0 2em 2em;
@@ -520,7 +540,6 @@ header{
     color: var(--clr-dark);
 }
 
-/* ✅ keep writing aligned in a nice readable column */
 .writing .section__title,
 .writing .section__subtitle {
     max-width: 800px;
@@ -600,10 +619,7 @@ header{
     line-height: 1.8;
 }
 
-/* =====================
-   Thesis overrides (smaller title)
-   ===================== */
-
+/* Thesis overrides (smaller title) */
 .essay--thesis .essay__title {
     font-size: 2.1rem;
     line-height: 1.15;
@@ -715,7 +731,6 @@ header{
   background: white;
 }
 
-/* Desktop button bar (hidden on mobile by default) */
 .langbar{
   display:none;
   gap:.5rem;
@@ -740,13 +755,11 @@ header{
   border-color: transparent;
 }
 
-/* show buttons on desktop, hide select */
 @media (min-width: 700px){
   .langswitch__label, .langswitch__select{ display:none; }
   .langbar{ display:flex; }
 }
 
-/* content blocks */
 .lang{ display:none; }
 .lang.lang--active{ display:block; }
 
@@ -789,59 +802,68 @@ header{
 }
 
 /* =====================
-   PATMAST editorial layout (CLEAN)
+   PATMAST editorial layout (FINAL)
    ===================== */
+
+.work-panel[data-panel="patmast"]{
+  text-align: left;
+}
 
 .work-panel__intro--narrow{
   max-width: 820px;
-  margin: 0 auto 2.25rem;
+  margin: 0 auto 2.75rem;
   text-align: center;
   line-height: 1.7;
+  opacity: 0.9;
 }
 
-/* Feature block = image + text */
 .patmast-feature{
   max-width: 1100px;
-  margin: 3.5rem auto 0;
+  margin: 3.5rem auto;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr; /* image wider than text */
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 2.5rem;
   align-items: start;
 }
 
-/* Reverse layout: text left, image right */
 .patmast-feature--reverse{
   grid-template-columns: 0.85fr 1.15fr;
 }
-.patmast-feature--reverse .patmast-feature__image{ order: 2; }
-.patmast-feature--reverse .patmast-feature__text{ order: 1; }
 
-/* Image column */
+.patmast-feature--reverse .patmast-feature__image{
+  order: 2;
+}
+
+.patmast-feature--reverse .patmast-feature__text{
+  order: 1;
+}
+
 .patmast-feature__image{
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-/* Image */
 .patmast-feature__img{
   width: 100%;
   height: auto;
-  max-width: 760px;     /* controls huge horizontal images */
+  max-width: 760px;
   border-radius: 12px;
   box-shadow: var(--bs);
   display: block;
 }
 
-/* If the image is vertical/poster-like */
-.patmast-feature__image--tall .patmast-feature__img{
-  max-width: 380px;     /* makes the 2nd one smaller */
+.patmast-feature__image--tall{
+  justify-content: flex-end;
 }
 
-/* Text column */
+.patmast-feature__image--tall .patmast-feature__img{
+  max-width: 380px;
+}
+
 .patmast-feature__text{
-  text-align: left;
   max-width: 420px;
+  text-align: left;
 }
 
 .patmast-feature__title{
@@ -863,11 +885,10 @@ header{
   opacity: 0.95;
 }
 
-/* Mobile: stack image above text */
 @media (max-width: 800px){
   .patmast-feature{
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .patmast-feature__text{

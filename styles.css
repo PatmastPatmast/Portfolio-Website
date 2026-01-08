@@ -831,7 +831,8 @@ header{
 
 /* if the image is vertical/poster-like */
 .patmast-feature__image--tall .patmast-feature__img{
-  max-width: 520px;
+    max-width: 380px;
+    margin-left: auto;
 }
 
 /* right column text */
@@ -909,6 +910,7 @@ header{
     order: initial;
   }
 }
+
 
 
 

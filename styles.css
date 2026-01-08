@@ -866,7 +866,7 @@ header{
 }
 
 .patmast-feature__title{
-  margin: 0 0 .6rem;
+  margin: 0 0 .1rem;
   font-size: 1.35rem;
   line-height: 1.2;
 }
@@ -909,6 +909,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

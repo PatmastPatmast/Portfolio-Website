@@ -309,7 +309,6 @@ header{
     letter-spacing: 0.08em;
     font-size: 0.75rem;
 
-    /* ✅ multi-line links centered per item */
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -321,9 +320,6 @@ header{
 .site-nav a:hover {
     color: var(--clr-accent);
 }
-
-
-
 
 /* My services section */
 
@@ -619,6 +615,7 @@ header{
         font-size: 2.75rem;
     }
 }
+
 /* =====================
    Lightbox (Fullscreen)
    ===================== */
@@ -637,7 +634,6 @@ header{
     pointer-events: none;
     transition: opacity 200ms ease;
 
-    /* ✅ wichtig für Touch Swipe */
     touch-action: pan-y;
 }
 
@@ -793,7 +789,7 @@ header{
 }
 
 /* =====================
-   PATMAST editorial layout
+   PATMAST editorial layout (CLEAN)
    ===================== */
 
 .work-panel__intro--narrow{
@@ -806,38 +802,46 @@ header{
 /* Feature block = image + text */
 .patmast-feature{
   max-width: 1100px;
-  margin: 0 auto 3.25rem;
+  margin: 3.5rem auto 0;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.15fr 0.85fr; /* image wider than text */
   gap: 2.5rem;
   align-items: start;
 }
 
-/* left column */
+/* Reverse layout: text left, image right */
+.patmast-feature--reverse{
+  grid-template-columns: 0.85fr 1.15fr;
+}
+.patmast-feature--reverse .patmast-feature__image{ order: 2; }
+.patmast-feature--reverse .patmast-feature__text{ order: 1; }
+
+/* Image column */
 .patmast-feature__image{
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 
-/* image styling (works with your lightbox) */
+/* Image */
 .patmast-feature__img{
   width: 100%;
   height: auto;
-  max-width: 760px;              /* controls huge horizontal images */
+  max-width: 760px;     /* controls huge horizontal images */
   border-radius: 12px;
   box-shadow: var(--bs);
   display: block;
 }
 
-/* if the image is vertical/poster-like */
+/* If the image is vertical/poster-like */
 .patmast-feature__image--tall .patmast-feature__img{
-    max-width: 380px;
-    margin-left: auto;
+  max-width: 380px;     /* makes the 2nd one smaller */
 }
 
-/* right column text */
+/* Text column */
 .patmast-feature__text{
   text-align: left;
+  max-width: 420px;
 }
 
 .patmast-feature__title{
@@ -866,56 +870,16 @@ header{
     gap: 1.25rem;
   }
 
+  .patmast-feature__text{
+    max-width: 100%;
+  }
+
   .patmast-feature__img{
     max-width: 100%;
   }
-}
 
-/* PATMAST feature layout */
-.patmast-feature{
-  max-width: 1000px;
-  margin: 2.5rem auto 0;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr; /* image a bit wider than text */
-  gap: 2rem;
-  align-items: start;
-}
-
-/* reverse: text left, image right */
-.patmast-feature--reverse{
-  grid-template-columns: 0.85fr 1.15fr;
-}
-.patmast-feature--reverse .patmast-feature__image{
-  order: 2;
-}
-.patmast-feature--reverse .patmast-feature__text{
-  order: 1;
-}
-
-/* image styling */
-.patmast-feature__img{
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-}
-
-/* mobile: stack */
-@media (max-width: 700px){
-  .patmast-feature{
-    grid-template-columns: 1fr;
-  }
   .patmast-feature--reverse .patmast-feature__image,
   .patmast-feature--reverse .patmast-feature__text{
     order: initial;
   }
 }
-
-
-
-
-
-
-
-
-

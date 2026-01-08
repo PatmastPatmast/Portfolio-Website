@@ -317,7 +317,7 @@ header{
     color: var(--clr-dark);
     font-weight: var(--fw-bold);
     letter-spacing: 0.08em;
-    font-size: 0.75rem;
+    font-size: 1.05rem;
 
     display: inline-flex;
     flex-direction: column;
@@ -909,6 +909,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

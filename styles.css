@@ -870,6 +870,47 @@ header{
   }
 }
 
+/* PATMAST feature layout */
+.patmast-feature{
+  max-width: 1000px;
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr; /* image a bit wider than text */
+  gap: 2rem;
+  align-items: start;
+}
+
+/* reverse: text left, image right */
+.patmast-feature--reverse{
+  grid-template-columns: 0.85fr 1.15fr;
+}
+.patmast-feature--reverse .patmast-feature__image{
+  order: 2;
+}
+.patmast-feature--reverse .patmast-feature__text{
+  order: 1;
+}
+
+/* image styling */
+.patmast-feature__img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* mobile: stack */
+@media (max-width: 700px){
+  .patmast-feature{
+    grid-template-columns: 1fr;
+  }
+  .patmast-feature--reverse .patmast-feature__image,
+  .patmast-feature--reverse .patmast-feature__text{
+    order: initial;
+  }
+}
+
+
 
 
 

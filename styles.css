@@ -5,15 +5,15 @@
 }
 
 :root{
-    --ff-primary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    --ff-secondary: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  --ff-primary: 'Source Sans 3', sans-serif;
+  --ff-secondary: 'Source Sans 3', sans-serif;
 
-    --fw-reg: 300;
-    --fw-bold: 900;
+  --fw-reg: 300;
+  --fw-bold: 700;
 
-    --clr-light:#fff;
-    --clr-dark: #303030;
-    --clr-accent: #16e0bd;
+  --clr-light:#fff;
+  --clr-dark: #303030;
+  --clr-accent: #16e0bd;
 
     --fs-hl: 3rem;
     --fs-h2: 2.25rem;
@@ -909,5 +909,3 @@ header{
     margin-right: 0;
   }
 }
-
-

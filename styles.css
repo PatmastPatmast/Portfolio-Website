@@ -826,6 +826,80 @@ header{
   align-items: start;
 }
 
+/* =====================
+   Collage background for PATMAST features
+   ===================== */
+
+.patmast-feature{
+  position: relative;
+  overflow: hidden; /* keep collage inside section */
+}
+
+.collage{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* dark veil for readability */
+.collage__overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+/* collage pieces */
+.collage__img{
+  position: absolute;
+  opacity: 0.12;
+  filter: grayscale(25%) blur(1px);
+  max-width: none; /* important: allow controlled sizing */
+  height: auto;
+}
+
+/* placements (adjust to taste) */
+.collage__img--a{
+  width: clamp(320px, 55vw, 760px);
+  left: -6%;
+  top: -8%;
+  transform: rotate(-2deg);
+}
+
+.collage__img--b{
+  width: clamp(220px, 32vw, 520px);
+  right: -8%;
+  top: 6%;
+  transform: rotate(3deg);
+  opacity: 0.10;
+  filter: grayscale(30%) blur(1.5px);
+}
+
+.collage__img--c{
+  width: clamp(260px, 38vw, 560px);
+  right: 4%;
+  bottom: -12%;
+  transform: rotate(-1deg);
+  opacity: 0.08;
+  filter: grayscale(35%) blur(2px);
+}
+
+/* make sure your real content sits above the collage */
+.patmast-feature__image,
+.patmast-feature__text{
+  position: relative;
+  z-index: 1;
+}
+
+/* mobile: reduce visual noise */
+@media (max-width: 640px){
+  .collage__img--b{ display:none; }
+  .collage__overlay{ background: rgba(0,0,0,0.62); }
+  .collage__img{ opacity: 0.10; }
+}
+
+
+
 .patmast-feature--reverse{
   grid-template-columns: 0.85fr 1.15fr;
 }
@@ -909,3 +983,4 @@ header{
     margin-right: 0;
   }
 }
+

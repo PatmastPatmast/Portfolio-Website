@@ -531,6 +531,47 @@ header{
     margin-right: auto;
 }
 
+.collage-section{
+  position: relative;
+  padding: 6rem 2rem 12rem;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  z-index: 1;
+}
+
+.collage-image{
+  width: min(92vw, 1200px);
+  height: auto;
+  display: block;
+}
+
+/* Cheng Huang feature sits above collage */
+.patmast-feature--cheng{
+  position: relative;
+  z-index: 2;
+}
+
+/* Only lift the image block into the collage */
+.patmast-feature--cheng .patmast-feature__image{
+  margin-top: -8rem; /* adjust as needed */
+  position: relative;
+  z-index: 3;
+}
+
+/* Mobile: disable overlap */
+@media (max-width: 800px){
+  .patmast-feature--cheng .patmast-feature__image{
+    margin-top: 0;
+  }
+  .collage-section{
+    padding-bottom: 6rem;
+  }
+}
+
+
+
 /* =====================
    Writing section
    ===================== */
@@ -909,3 +950,4 @@ header{
     margin-right: 0;
   }
 }
+

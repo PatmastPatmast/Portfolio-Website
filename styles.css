@@ -802,7 +802,7 @@ header{
 }
 
 /* =====================
-   PATMAST editorial layout (FINAL)
+   PATMAST editorial layout
    ===================== */
 
 .work-panel[data-panel="patmast"]{
@@ -818,6 +818,11 @@ header{
 }
 
 .patmast-feature{
+  position: relative;
+  overflow: hidden;
+  padding: 2.25rem;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.03);
   max-width: 1100px;
   margin: 2.75rem auto;
   display: grid;
@@ -825,80 +830,6 @@ header{
   gap: 2.5rem;
   align-items: start;
 }
-
-/* =====================
-   Collage background for PATMAST features
-   ===================== */
-
-.patmast-feature{
-  position: relative;
-  overflow: hidden; /* keep collage inside section */
-}
-
-.collage{
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* dark veil for readability */
-.collage__overlay{
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-}
-
-/* collage pieces */
-.collage__img{
-  position: absolute;
-  opacity: 0.12;
-  filter: grayscale(25%) blur(1px);
-  max-width: none; /* important: allow controlled sizing */
-  height: auto;
-}
-
-/* placements (adjust to taste) */
-.collage__img--a{
-  width: clamp(320px, 55vw, 760px);
-  left: -6%;
-  top: -8%;
-  transform: rotate(-2deg);
-}
-
-.collage__img--b{
-  width: clamp(220px, 32vw, 520px);
-  right: -8%;
-  top: 6%;
-  transform: rotate(3deg);
-  opacity: 0.10;
-  filter: grayscale(30%) blur(1.5px);
-}
-
-.collage__img--c{
-  width: clamp(260px, 38vw, 560px);
-  right: 4%;
-  bottom: -12%;
-  transform: rotate(-1deg);
-  opacity: 0.08;
-  filter: grayscale(35%) blur(2px);
-}
-
-/* make sure your real content sits above the collage */
-.patmast-feature__image,
-.patmast-feature__text{
-  position: relative;
-  z-index: 1;
-}
-
-/* mobile: reduce visual noise */
-@media (max-width: 640px){
-  .collage__img--b{ display:none; }
-  .collage__overlay{ background: rgba(0,0,0,0.62); }
-  .collage__img{ opacity: 0.10; }
-}
-
-
 
 .patmast-feature--reverse{
   grid-template-columns: 0.85fr 1.15fr;
@@ -911,6 +842,8 @@ header{
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  position: relative;
+  z-index: 1;
 }
 
 .patmast-feature__img{
@@ -928,7 +861,7 @@ header{
 }
 
 .patmast-feature__image--tall .patmast-feature__img{
-  max-width: 420px; /* change back to 380px if you want smaller */
+  max-width: 420px;
   margin-left: auto;
   margin-right: 0;
   box-shadow: 0 12px 30px rgba(0,0,0,0.35);
@@ -937,6 +870,8 @@ header{
 .patmast-feature__text{
   max-width: 420px;
   text-align: left;
+  position: relative;
+  z-index: 1;
 }
 
 .patmast-feature__title{
@@ -958,48 +893,13 @@ header{
   opacity: 0.95;
 }
 
-@media (max-width: 800px){
-  .patmast-feature{
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .patmast-feature__text{
-    max-width: 100%;
-  }
-
-  .patmast-feature__img{
-    max-width: 100%;
-  }
-
-  .patmast-feature--reverse .patmast-feature__image,
-  .patmast-feature--reverse .patmast-feature__text{
-    order: initial;
-  }
-
-  /* On mobile, don't force the tall image to the right */
-  .patmast-feature__image--tall .patmast-feature__img{
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
 /* =====================
    Collage background for PATMAST features
    ===================== */
 
-.patmast-feature{
-  position: relative;
-  overflow: hidden;
-  padding: 2.25rem;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.03);
-}
-
-/* collage container */
 .collage{
   position: absolute;
-  inset: 18px;                 /* inner breathing space */
+  inset: 18px;
   z-index: 0;
   pointer-events: none;
   border-radius: 22px;
@@ -1061,13 +961,6 @@ header{
   filter: grayscale(35%) blur(2px);
 }
 
-/* keep real content above collage */
-.patmast-feature__image,
-.patmast-feature__text{
-  position: relative;
-  z-index: 1;
-}
-
 /* mobile: reduce noise */
 @media (max-width: 640px){
   .collage__img--b{ display:none; }
@@ -1079,5 +972,28 @@ header{
   }
 }
 
+@media (max-width: 800px){
+  .patmast-feature{
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
+  .patmast-feature__text{
+    max-width: 100%;
+  }
 
+  .patmast-feature__img{
+    max-width: 100%;
+  }
+
+  .patmast-feature--reverse .patmast-feature__image,
+  .patmast-feature--reverse .patmast-feature__text{
+    order: initial;
+  }
+
+  /* On mobile, don't force the tall image to the right */
+  .patmast-feature__image--tall .patmast-feature__img{
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

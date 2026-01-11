@@ -54,9 +54,6 @@ section{
     padding: 5em 2em;
 }
 
-.collage-section + section{
-  padding-top: 1.5rem;
-}
 
 img{
     display: block;
@@ -544,6 +541,15 @@ header{
   z-index: 1;
 }
 
+.patmast-feature--cheng .patmast-feature__image{
+  margin-top: -10rem;
+}
+
+.collage-section + section{
+  padding-top: 1.5rem;
+}
+
+
 .collage-image{
   width: min(92vw, 1200px);
   height: auto;
@@ -961,6 +967,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

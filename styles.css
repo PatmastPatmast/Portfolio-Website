@@ -562,7 +562,7 @@ header{
 
 /* Only lift the image block into the collage */
 .patmast-feature--cheng .patmast-feature__image{
-  margin-top: -12rem; /* adjust as needed */
+  margin-top: -9rem; /* adjust as needed */
   position: relative;
   z-index: 3;
 }
@@ -965,6 +965,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

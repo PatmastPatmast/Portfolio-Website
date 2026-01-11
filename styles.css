@@ -54,10 +54,6 @@ section{
     padding: 5em 2em;
 }
 
-.collage-section,
-.patmast-feature{
-  padding: 0;
-}
 
 img{
     display: block;
@@ -955,5 +951,6 @@ header{
     margin-right: 0;
   }
 }
+
 
 

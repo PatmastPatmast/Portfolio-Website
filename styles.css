@@ -534,7 +534,7 @@ header{
 
 .collage-section{
   position: relative;
-  padding: 1rem 2rem 12rem;
+  padding: 1rem 2rem 2rem;
   display: flex;
   justify-content: center;
   overflow: visible;
@@ -959,6 +959,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

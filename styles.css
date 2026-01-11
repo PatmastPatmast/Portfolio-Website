@@ -545,10 +545,6 @@ header{
   margin-top: -2.5rem;   /* zieht Collage hoch -> super nah */
 }
 
-
-
-.patmast-feature--cheng .patmast-feature__image{
-  margin-top: -20rem;
 }
 
 .collage-section + section{
@@ -570,7 +566,7 @@ header{
 
 /* Only lift the image block into the collage */
 .patmast-feature--cheng .patmast-feature__image{
-  margin-top: -7rem; /* adjust as needed */
+  margin-top: -20rem; /* adjust as needed */
   position: relative;
   z-index: 3;
 }
@@ -973,6 +969,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

@@ -535,16 +535,11 @@ header{
 .collage-section{
   position: relative;
   padding: .25rem 2rem 1.5rem;  /* top right/left bottom */
-  margin-top: -6rem;
+  margin-top: -20rem;
   display: flex;
   justify-content: center;
   overflow: visible;
   z-index: 1;
-}
-
-
-.patmast-feature + .collage-section{
-  margin-top: -2.5rem;   /* zieht Collage hoch -> super nah */
 }
 
 }
@@ -971,6 +966,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

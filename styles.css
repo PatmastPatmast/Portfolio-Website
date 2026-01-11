@@ -535,7 +535,7 @@ header{
 .collage-section{
   position: relative;
   padding: .25rem 2rem 1.5rem;  /* top right/left bottom */
-  margin-top: -8rem;
+  margin-top: -7rem;
   display: flex;
   justify-content: center;
   overflow: visible;
@@ -562,7 +562,7 @@ header{
 
 /* Only lift the image block into the collage */
 .patmast-feature--cheng .patmast-feature__image{
-  margin-top: -15rem; /* adjust as needed */
+  margin-top: -12rem; /* adjust as needed */
   position: relative;
   z-index: 3;
 }
@@ -965,6 +965,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

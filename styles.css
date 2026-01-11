@@ -549,7 +549,7 @@ header{
 
 
 .collage-image{
-  width: min(92vw, 1200px);
+  width: min(95vw, 1700px);
   height: auto;
   display: block;
 }
@@ -965,6 +965,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

@@ -54,6 +54,9 @@ section{
     padding: 5em 2em;
 }
 
+.collage-section + section{
+  padding-top: 1.5rem;
+}
 
 img{
     display: block;
@@ -958,6 +961,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

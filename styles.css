@@ -535,14 +535,13 @@ header{
 .collage-section{
   position: relative;
   padding: .25rem 2rem 1.5rem;  /* top right/left bottom */
-  margin-top: -20rem;
+  margin-top: -8rem;
   display: flex;
   justify-content: center;
   overflow: visible;
   z-index: 1;
 }
 
-}
 
 .collage-section + section{
   padding-top: 1.5rem;
@@ -966,6 +965,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

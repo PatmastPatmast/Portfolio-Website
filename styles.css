@@ -541,6 +541,12 @@ header{
   z-index: 1;
 }
 
+.patmast-feature + .collage-section{
+  margin-top: -2.5rem;   /* zieht Collage hoch -> super nah */
+}
+
+
+
 .patmast-feature--cheng .patmast-feature__image{
   margin-top: -20rem;
 }
@@ -967,6 +973,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

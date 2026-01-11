@@ -556,7 +556,7 @@ header{
 
 /* Only lift the image block into the collage */
 .patmast-feature--cheng .patmast-feature__image{
-  margin-top: -8rem; /* adjust as needed */
+  margin-top: -7rem; /* adjust as needed */
   position: relative;
   z-index: 3;
 }
@@ -940,6 +940,15 @@ header{
     max-width: 100%;
   }
 
+.collage-section{
+  padding: 2rem 2rem 3rem; /* smaller than before */
+  background: #111;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+
   .patmast-feature--reverse .patmast-feature__image,
   .patmast-feature--reverse .patmast-feature__text{
     order: initial;
@@ -951,6 +960,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

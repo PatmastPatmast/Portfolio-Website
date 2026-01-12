@@ -554,6 +554,16 @@ header{
   display: block;
 }
 
+/* Collage komplett statisch (keine Interaktion) */
+.collage-section,
+.collage-section * {
+  pointer-events: none;      /* keine Klicks / kein Hover / kein Touch */
+  user-select: none;         /* keine Auswahl */
+  -webkit-user-select: none; /* Safari */
+  -webkit-user-drag: none;   /* Safari/Chrome: kein Drag */
+}
+
+
 /* Cheng Huang feature sits above collage */
 .patmast-feature--cheng{
   position: relative;
@@ -965,6 +975,7 @@ header{
     margin-right: 0;
   }
 }
+
 
 
 

@@ -5,15 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>When Japanese Aesthetics Cross Borders — Patrick Hlubek</title>
 
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- FontAwesome (used in footer) -->
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-  <header style="padding: 1em;">
+  <!-- Optional: keep site nav consistent across pages -->
+  <nav class="site-nav">
+    <ul class="site-nav__list">
+      <li><a href="./index.html#work">My Work</a></li>
+      <li><a href="./writing.html">Writing</a></li>
+      <li><a href="./about.html">About Me</a></li>
+    </ul>
+  </nav>
+
+  <header>
     <a href="writing.html" class="btn">Back</a>
   </header>
 
@@ -45,13 +52,10 @@
         </div>
       </div>
 
-      <!-- Content blocks per language -->
       <div class="essay__content">
 
         <!-- EN -->
         <div class="lang lang--active" data-lang="en" lang="en">
-          <h2>When Japanese Aesthetics Cross Borders: Impermanence in Taiwanese Fashion</h2>
-
           <p>You've seen it before: another collection draped in cherry blossom references, another campaign promising "Zen minimalism," another designer namedrops <em>mono no aware</em> while showing muted linens and asymmetric hems. Japanese aesthetics have become fashion's shorthand for depth, for quiet emotion, for that elusive quality we call timelessness.</p>
 
           <p>But here's the thing about timelessness: it erases context. And context is where things get interesting.</p>
@@ -117,25 +121,11 @@
           <p>And in that pressure, between emotion and translation and context, impermanence stops being a style choice. It becomes real again.</p>
         </div>
 
-        <!-- DE (placeholder) -->
-        <div class="lang" data-lang="de" lang="de">
-          <p><em>Deutsch version coming soon.</em></p>
-        </div>
-
-        <!-- JA (placeholder) -->
-        <div class="lang" data-lang="ja" lang="ja">
-          <p><em>日本語版は準備中です。</em></p>
-        </div>
-
-        <!-- ZH (placeholder) -->
-        <div class="lang" data-lang="zh" lang="zh">
-          <p><em>中文版本即将上线。</em></p>
-        </div>
-
-        <!-- PL (placeholder) -->
-        <div class="lang" data-lang="pl" lang="pl">
-          <p><em>Wersja polska wkrótce.</em></p>
-        </div>
+        <!-- Placeholders -->
+        <div class="lang" data-lang="de" lang="de"><p><em>Deutsch version coming soon.</em></p></div>
+        <div class="lang" data-lang="ja" lang="ja"><p><em>日本語版は準備中です。</em></p></div>
+        <div class="lang" data-lang="zh" lang="zh"><p><em>中文版本即将上线。</em></p></div>
+        <div class="lang" data-lang="pl" lang="pl"><p><em>Wersja polska wkrótce.</em></p></div>
 
       </div>
     </article>
